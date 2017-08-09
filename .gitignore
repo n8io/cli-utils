@@ -1,0 +1,10 @@
+log
+logs
+*.log
+node_modules
+coverage
+.DS_Store
+
+.*-grid-dev
+.*-settings
+!.*.sample
