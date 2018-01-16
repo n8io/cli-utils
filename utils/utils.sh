@@ -10,7 +10,7 @@ alias brch="brc"
 alias brce="cd ~ && e; cd -" # Open bashrc directory
 alias cls="clear"
 alias ll="ls -FGlAhp"
-alias edit="atom"
+alias edit="${EDITOR:-nano}"
 alias a.="edit ."
 alias brco="edit ~/.bashrc" # Open bashrc
 alias hosts="edit /private/etc/hosts" # Yay hosts file shortcut
@@ -80,7 +80,7 @@ echo "Terminal session setup complete \033[32m✔\033[0m."
 # Export defaults
 export \
   NODE_ENV="development" \
-  EDITOR="atom" \
+  EDITOR="${EDITOR:-nano}" \
   ;
 
 
