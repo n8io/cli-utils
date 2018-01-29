@@ -84,4 +84,4 @@ export \
   ;
 
 
-ulimit -n 65536 65536 # prevent file table overflow bs
+# ulimit -n 65536 65536 # prevent file table overflow bs
