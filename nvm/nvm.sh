@@ -1,6 +1,6 @@
 #!/bin/bash
-type nvm >/dev/null
-if [ $? -ne 0 ]; then
+which nvm >/dev/null
+if [ "$?" -ne 0 ]; then
 	echo "\033[31mnvm setup failed! Node version manager is not installed. Install via: curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash\033[0m"
 
 	return 1

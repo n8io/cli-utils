@@ -4,9 +4,9 @@
 # DO NOT MODIFY BELOW HERE UNLESS YOU KNOW WHAT YOUR ARE DOING
 # ############################################################
 
-type yarn >/dev/null
-if [ $? -ne 0 ]; then
-	echo "\033[31myarn setup failed! Yarn package manager is not installed. Install via: curl -o- -L https://yarnpkg.com/install.sh | bash\033[0m"
+which yarn >/dev/null
+if [ "$?" -ne 0 ]; then
+	echo "\033[31myarn setup failed! Yarn package manager is not installed. Install via: npm install -g yarn\033[0m"
 
 	return 1
 fi
