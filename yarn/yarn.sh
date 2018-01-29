@@ -8,6 +8,8 @@ type yarn >/dev/null
 if [ $? -ne 0 ]; then
 	echo "\033[31myarn setup failed! Yarn package manager is not installed.\033[0m"
 
+	printf "Try installing with:\n\tcurl -o- -L https://yarnpkg.com/install.sh | bash"
+
 	return 1
 fi
 
