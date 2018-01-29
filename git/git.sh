@@ -32,6 +32,8 @@ alias gba="git ba"
 alias gbd="git bd"
 alias gbde="git bde"
 alias gbl="git bl"
+alias gd="git diff"
+alias gl="git log --graph --pretty=oneline --abbrev-commit"
 alias gmffo="git mffo" # git merge --ff--only
 alias gpo="git po"
 alias gpuo="git puo"
