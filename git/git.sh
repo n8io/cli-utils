@@ -10,7 +10,11 @@ echo -n "  Aliasing commands..."
 alias gs="git s" # git status
 alias gpf="git pusf"
 alias gpul="git pul"
+alias gpul="git plu"
+alias gpul="git plul"
 alias gpus="git pus"
+alias gpus="git psh"
+alias gpus="git psuh"
 alias gk="git ck" # git checkout
 alias gkb="git ck -b" # git checkout -b
 alias gkm="git ck master" # git checkout master
