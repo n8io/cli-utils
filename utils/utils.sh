@@ -18,6 +18,7 @@ alias clp="rm -rf node_modules/ src/precompile/statics/bower_components/ dist/ b
 alias pj="python -m json.tool"
 alias prettyJson="pj"
 alias pbj="pj | pbcopy"
+alias resrc="LWD=${PWD}; source ~/.bashrc && cd $LWD"
 echo "\033[32m ✔\033[0m"
 
 echo -n "  Adding custom functions..."
