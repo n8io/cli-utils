@@ -18,7 +18,6 @@ alias clp="rm -rf node_modules/ src/precompile/statics/bower_components/ dist/ b
 alias pj="python -m json.tool"
 alias prettyJson="pj"
 alias pbj="pj | pbcopy"
-alias resrc="LWD=${PWD}; source ~/.bashrc && cd $LWD"
 echo "\033[32m ✔\033[0m"
 
 echo -n "  Adding custom functions..."
@@ -31,7 +30,7 @@ killport() { lsof -i tcp:"$@" | awk 'NR!=1 {print $2}' | xargs kill -9;}
 
 ip() {
   INTERNAL_IP=$(ipconfig getifaddr ${1:-en0})
-	EXTERNAL_IP=$(curl -s -4 http://icanhazip.com)
+	EXTERNAL_IP=$(curl -s -4 http://whatismyip.akamai.com)
 	echo -e "\e[32mLAN\e[0m $INTERNAL_IP\n\e[33mWAN\e[0m $EXTERNAL_IP"
 }
 
@@ -53,24 +52,29 @@ sshe() {
 }
 
 is_online() {
-  URL=${1:-"https://google.com"}
-  wget -q --tries=3 --timeout=1 -O - "${URL}" > /dev/null
+  echo -e "GET http://google.com HTTP/1.0\n\n" | nc google.com 80 > /dev/null 2>&1
 
-  if [[ $? -eq 0 ]]; then
-    echo true;
+  if [ $? -eq 0 ]; then
+      echo "online OK"
+      return 0
   else
-    echo false;
+      echo "offline"
+      return 1
   fi
 }
 
 ssh-setup() {
   IS_ONLINE=$(is_online)
 
-  if [ $IS_ONLINE == "true" ]; then
+  if [ $? -eq 0 ]; then
     bash <(curl -sL https://goo.gl/wBwtFN)
   else
     echo "Not currently online. Cannot execute remote scripts.";
   fi
+}
+
+resrc() {
+  LWD="$PWD"; source ~/.bashrc && cd "$LWD"
 }
 echo "\033[32m ✔\033[0m"
 
