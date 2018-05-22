@@ -102,6 +102,21 @@ echo " \033[32m✔\033[0m."
 echo -n "  Adding custom functions..."
 dkdangle() { docker rmi -f $(docker images -q --filter dangling=true) >/dev/null 2>&1; } # Delete dangling images
 dkprune() { docker rm $(docker ps -a -q) >/dev/null 2>&1; } # Delete containers that are no longer in use
+dkreset() {
+  scorch_earth() {
+    echo "Force deleting docker containers..." \
+    && docker rm -f $(docker ps -a -q) >/dev/null 2>&1 || true \
+    && echo "Force deleting docker images..." \
+    && docker rmi -f $(docker images -q) >/dev/null 2>&1 || true \
+    && echo "🔥 🌎 🚫 🐳 Success" \
+    ;
+  }
+
+  read "yn?Are you sure you want to delete all your containers and images [yN]?"
+  if [[ "$yn" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
+    scorch_earth
+  fi
+} # Scorch Docker earth
 echo " \033[32m✔\033[0m."
 
 alias dkclean="dkdangle; dkprune"
