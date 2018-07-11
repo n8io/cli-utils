@@ -122,9 +122,12 @@ dkid() {
 
   if [ $OK -eq 1 ]; then
     docker ps --filter "name=${1}" --format "{{.ID}}"
+  elif [ $OK -lt 1 ]; then
+    echo "No containers were found."
+    return 1
   else
     echo "Name too general. Returned multiple results."
-    docker ps --filter "name=${1}"
+    docker ps --filter "name=${1}" --format "{{.Names}}"
     return 1
   fi
 }
