@@ -117,6 +117,17 @@ dkreset() {
     scorch_earth
   fi
 } # Scorch Docker earth
+dkid() {
+  OK=$(docker ps --filter "name=${1}" --format "{{.ID}}" | wc -l)
+
+  if [ $OK -eq 1 ]; then
+    docker ps --filter "name=${1}" --format "{{.ID}}"
+  else
+    echo "Name too general. Returned multiple results."
+    docker ps --filter "name=${1}"
+    return 1
+  fi
+}
 echo " \033[32m✔\033[0m."
 
 alias dkclean="dkdangle; dkprune"
