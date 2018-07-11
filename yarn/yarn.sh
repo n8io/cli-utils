@@ -141,6 +141,7 @@ alias ytets="yt"
 alias ytest="yt"
 alias ytst="yt"
 alias ytset="yt"
+alias ytw="y test:watch"
 
 alias ytg="y tag"
 alias ytga="ytg add"
