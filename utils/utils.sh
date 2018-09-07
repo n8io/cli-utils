@@ -78,7 +78,9 @@ resrc() {
 }
 echo "\033[32m ✔\033[0m"
 
-# Custom alieas
+# Custom aliases
+[[ $(command -v bat) ]] && alias cat="bat"
+
 
 echo "Terminal session setup complete \033[32m✔\033[0m."
 
@@ -87,6 +89,5 @@ export \
   NODE_ENV="development" \
   EDITOR="${EDITOR:-nano}" \
   ;
-
 
 # ulimit -n 65536 65536 # prevent file table overflow bs
