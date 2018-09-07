@@ -112,6 +112,11 @@ update_git_global_aliases() {
 
 update_git_global_aliases
 
+if [[ ! -z $(command -v git-mob) ]]; then
+  alias gm="git mob"
+  alias gms="git solo"
+fi
+
 echo " \033[32m✔\033[0m."
 
 echo "Git setup complete \033[32m✔\033[0m."
