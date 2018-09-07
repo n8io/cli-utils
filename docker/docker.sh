@@ -49,7 +49,6 @@ alias dkport="dk port"
 alias dkp="dk ps"
 alias dkps="dkp"
 alias dkpsa="dkp -a"
-alias dkls="dkp"
 alias dkpull="dk pull"
 alias dkpush="dk push"
 alias dkrn="dk rename"
@@ -101,11 +100,12 @@ echo " \033[32m✔\033[0m."
 
 echo -n "  Adding custom functions..."
 dkdangle() { docker rmi -f $(docker images -q --filter dangling=true) >/dev/null 2>&1; } # Delete dangling images
-dkprune() { docker rm $(docker ps -a -q) >/dev/null 2>&1; } # Delete containers that are no longer in use
+dkprune() { docker rm $(dkps -a -q) >/dev/null 2>&1; } # Delete containers that are no longer in use
+
 dkreset() {
   scorch_earth() {
     echo "Force deleting docker containers..." \
-    && docker rm -f $(docker ps -a -q) >/dev/null 2>&1 || true \
+    && docker rm -f $(dkps -a -q) >/dev/null 2>&1 || true \
     && echo "Force deleting docker images..." \
     && docker rmi -f $(docker images -q) >/dev/null 2>&1 || true \
     && echo "🔥 🌎 🚫 🐳 Success" \
@@ -117,6 +117,11 @@ dkreset() {
     scorch_earth
   fi
 } # Scorch Docker earth
+
+dkfind() {
+  docker ps --filter "name=${1}" --format "{{.ID}}"
+}
+
 dkid() {
   OK=$(docker ps --filter "name=${1}" --format "{{.ID}}" | wc -l)
 
@@ -131,6 +136,37 @@ dkid() {
     return 1
   fi
 }
+
+dkls() {
+  OK=$(docker ps --filter "name=${1}" --format "{{.ID}}" | wc -l)
+
+  if [ $OK -eq 1 ]; then
+    dkx -it  $(dkid ${1}) ls -lFa ${2}
+  elif [ $OK -lt 1 ]; then
+    echo "No containers were found."
+    return 1
+  else
+    echo "Name too general. Returned multiple results."
+    dkps --filter "name=${1}" --format "{{.Names}}"
+    return 1
+  fi
+}
+
+dkcp() {
+  OK=$(dkps --filter "name=${1}" --format "{{.ID}}" | wc -l)
+
+  if [ $OK -eq 1 ]; then
+    dk cp "${2}" $(dkid ${1}):"${3}"
+  elif [ $OK -lt 1 ]; then
+    echo "No containers were found."
+    return 1
+  else
+    echo "Name too general. Returned multiple results."
+    dkps --filter "name=${1}" --format "{{.Names}}"
+    return 1
+  fi
+}
+
 echo " \033[32m✔\033[0m."
 
 alias dkclean="dkdangle; dkprune"
