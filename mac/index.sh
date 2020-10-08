@@ -1,4 +1,2 @@
 #!/bin/bash
-CWD="$(cd "$(dirname "$0")" && pwd -P)"
-
-source ${CWD}/init.sh
+source "${CLI_UTILS_PATH}/mac/init.sh"

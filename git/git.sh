@@ -8,6 +8,7 @@ echo "Setting up Git..."
 
 echo -n "  Aliasing commands..."
 alias gaa="git add ."
+alias gbc="git branch | grep '^\*' | cut -d' ' -f2 | tr -d '\n'"
 alias gs="git s" # git status
 alias gpf="git pusf"
 alias gpul="git pul"
@@ -19,7 +20,7 @@ alias gkn="git ck next" # git checkout next
 alias gkd="git ck dev" # git checkout dev
 alias gc="git co"
 alias gco="git co"
-alias gbdm="git branch --merged | egrep -v \"^\*|master|next|dev|develop|development|stg\" | xargs -n 1 git branch -D" # Delete local branches that have been merged and are not master, next, dev, etc
+alias gbdm="git branch --merged | egrep -v \"^\*|master|main|next|dev|develop|development|stg\" | xargs -n 1 git branch -D" # Delete local branches that have been merged and are not master, next, dev, etc
 alias ga="git a"
 alias gi="git ig"
 alias gf="git f"

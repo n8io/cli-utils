@@ -1,4 +1,2 @@
 #!/bin/bash
-CWD="$(cd "$(dirname "$0")" && pwd -P)"
-
-source ${CWD}/rvm.sh
+source "${CLI_UTILS_PATH}/rvm/rvm.sh"

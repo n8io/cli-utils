@@ -1,4 +1,2 @@
 #!/bin/bash
-CWD="$(cd "$(dirname "$0")" && pwd -P)"
-
-source ${CWD}/npm.sh
+source "${CLI_UTILS_PATH}/npm/npm.sh"

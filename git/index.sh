@@ -1,4 +1,2 @@
 #!/bin/bash
-CWD="$(cd "$(dirname "$0")" && pwd -P)"
-
-source ${CWD}/git.sh
+source "${CLI_UTILS_PATH}/git/git.sh"
