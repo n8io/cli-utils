@@ -54,6 +54,21 @@ alias gstl="git sthl"
 alias gcg="git config --global"
 alias gitalias="alias | egrep \"^g\" | sort"
 
+gcbn() {
+  gbc | pbcopy
+  echo "👍 Copied branch to clipboard"
+}
+
+glcp() {
+  prepend() { while read line; do echo "${1}${line}"; done; }
+
+  BRANCH=$(git rev-parse --abbrev-ref HEAD)
+  COMMIT=$(git show-branch -a 2>/dev/null | grep '\*' | grep -v "$BRANCH" | head -n1 | sed 's/.*\[\(.*\)\].*/\1/' | sed 's/[\^~].*//' | xargs git rev-parse)
+  RAW=$(git log --pretty=oneline --abbrev-commit --reverse ${COMMIT}.. | prepend "- ")
+  echo $RAW | pbcopy
+  echo "👍 Copied commits to clipboard"
+}
+
 update_git_global_aliases() {
   GIT_CONFIG="${HOME}/.gitconfig"
   DAYS_STALE=30
