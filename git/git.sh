@@ -20,9 +20,7 @@ alias gkn="git ck next" # git checkout next
 alias gkd="git ck dev" # git checkout dev
 alias gc="git co"
 alias gco="git co"
-alias gbdml="git fetch -p && for branch in $(git for-each-ref --format '%(refname) %(upstream:track)' refs/heads | awk '$2 == "[gone]" {sub("refs/heads/", "", $1); print $1}'); do git branch -D ${branch}; done"
 alias gbdmr="git branch --merged | egrep -v \"^\*|master|main|next|dev|develop|development|stg\" | xargs -n 1 git branch -D" # Delete local branches that have been merged and are not master, next, dev, etc
-alias gbdm="gbdmr && gbdml"
 alias ga="git a"
 alias gi="git ig"
 alias gf="git f"
@@ -55,6 +53,14 @@ alias gstp="git sthp"
 alias gstl="git sthl"
 alias gcg="git config --global"
 alias gitalias="alias | egrep \"^g\" | sort"
+
+gbdm() {
+  # Delete local branches that have been merged and are not master, next, dev, etc
+  git branch --merged | egrep -v '^\*|master|main|next|dev|develop|development|stg' | xargs -n 1 git branch -D
+
+  # Delete local branches whose upstream branches have been deleted
+  git fetch -p && for branch in $(git for-each-ref --format '%(refname) %(upstream:track)' refs/heads | awk '$2 == "[gone]" {sub("refs/heads/", "", $1); print $1}'); do git branch -D $branch; done
+}
 
 gcbn() {
   gbc | pbcopy
