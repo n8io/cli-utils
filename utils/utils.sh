@@ -74,7 +74,7 @@ ssh-setup() {
 }
 
 resrc() {
-  LWD="$PWD"; source ~/.bashrc && cd "$LWD"
+  LWD="$PWD"; source ~/.zshrc && cd "$LWD"
 }
 echo "\033[32m ✔\033[0m"
 
@@ -87,7 +87,8 @@ alias weather="curl wttr.in/44203"
 # brew install switchaudio-osx
 # SwitchAudioSource -a # List available devices
 alias sas="SwitchAudioSource"
-alias sls="sas -t output -s \"DELL U3818DW\" && sas -t input -s \"Scarlett Solo USB\""
+alias sia="sas -t output -s \"HyperX 7.1 Audio\" && sas -t input -s \"Audio-Technica\""
+alias sls="sas -t output -s \"MacBook Pro Speakers\" && sas -t input -s \"Scarlett Solo USB\""
 alias shs="sas -t output -s \"HyperX 7.1 Audio\"     && sas -t input -s \"Scarlett Solo USB\""
 alias sbs="sas -t output -s \"Boltune BT-BH021\"     && sas -t input -s \"Scarlett Solo USB\""
 alias light_off="curl --request GET --url 'https://maker.ifttt.com/trigger/OFF_AIR/with/key/dyrALWSnuVSulMtiacw_M7?='"
@@ -98,8 +99,10 @@ off_air() {
 }
 
 on_air() {
-  shs && light_on
+  sia && light_on
 }
+
+alias naptime="off_air && pmset sleepnow"
 
 echo "Terminal session setup complete \033[32m✔\033[0m."
 
